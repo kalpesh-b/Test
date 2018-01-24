@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Enrolled Farmers</title>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <!-- Bootstrap 3.3.6 -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/admin.css">
+  <link rel="stylesheet" href="/css/skin-blue.css">
+  <link rel="stylesheet" href="/css/datepicker.css">
+  <link rel="stylesheet" href="/css/bootstrap-select.min.css">
+  <link rel="stylesheet" href="/css/style.css">
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+  <div class="wrapper">
+    <!-- Main Header -->
+    <% include ./header %>
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+      <!-- Main content -->
+      <div class="new_form_enrollment">
+        <section class="content">
+          <form>
+            <div class="row">
+              <div class="col-md-11">
+                <div class="whitebox">
+                  <div class="content">
+                    <div class="row">
+                      <div class="col-sm-6 icon-btn-colmun">
+                        <a href="javascript:;" class="icon-right"><i><img src="/images/icon-search-green.png" alt="TT"></i></a>
+                        <input type="text" class="form-control" placeholder="Search">
+                      </div>
+                      <div class="col-sm-2">
+                        <button type="submit" class="btn btn-block green">Advance Search</button>
+                      </div>
+                      <div class="col-sm-4">
+                        <select class="form-control selectpicker select_2">
+                          <option>All GCPs</option>
+                          <option>Option 1</option>
+                          <option>Option 2</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+
+          <div class="list_enrollment_farmers">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>&nbsp;</th>
+                  <th>Insp. Date</th>
+                  <th>Name</th>
+                  <th>Location</th>
+                  <th>GCP</th>
+                  <th>Status</th>
+                  <th style="text-align:center">Option</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% for (var i = 0; i < ttdata.length; i++) { %>
+                  <tr>
+                    <td><div class="profile_pic"><img src="/images/icon-user.png" alt="user"></div></td>
+                    <td><%= ttdata[i].created_date %></td>
+                    <td><%= ttdata[i].frm_frm_name %> <%= ttdata[i].frm_last_name %></td>
+                    <td><%= ttdata[i].email %></td>
+                    <td><%= ttdata[i].gcp_name %></td>
+                    <td><%= ttdata[i].status_id %></td>
+                    <td>
+                      <div class="edit_icons">
+                        <div class="col-md-offset-3  col-md-2">
+                          <a href="/ici/view?id=<%= ttdata[i].field_insp_id %>" data-toggle="tooltip" title="View"><img src="/images/icon-view.png" alt="Edit"></a>
+                        </div>
+                        <div class="col-md-2">
+                          <a href="/ici/update?id=<%= ttdata[i].field_insp_id %>" data-toggle="tooltip" title="Update"><img src="/images/icon-edit.png" alt="Edit"></a>
+                        </div>
+                        <div class="col-md-2">
+                          <form action="/ici/delete?id=<%= ttdata[i].field_insp_id %>" method="POST">
+                            <input type="image" src="/images/icon-trash.png" alt="Submit" data-toggle="tooltip" title="Delete">  </form>
+                          </div>
+                        </div>
+
+                      </td>
+                    </tr>
+                    <% } %>
+                  </tbody>
+                </table>
+                <div class="ef_list_btn_botm clearfix">
+                  <div class="row">
+                    <div class="col-md-6 col-sm-6">
+                      <ul class="lef_pagination">
+                        <!--<li class="disabled"><a href="#">&laquo;</a></li>-->
+                        <li class="active"><a href="#">1</a></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#">4</a></li>
+                        <li><a href="#">5</a></li>
+                        <!-- <li><a href="#">&raquo;</a></li>-->
+                      </ul>
+                    </div>
+                    <div class="col-md-6 col-sm-6 ef_list_btn">
+                      <button type="submit" class="btn green">Export</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Your Page Content Here -->
+            </section>
+          </div>
+          <!-- /.content -->
+        </div>
+        <!-- /.content-wrapper -->
+
+      </div>
+      <!-- ./wrapper -->
+      <!-- REQUIRED JS SCRIPTS -->
+      <!-- jQuery 2.2.3 -->
+      <script src="/js/jquery-2.2.3.min.js"></script>
+      <!-- Bootstrap 3.3.6 -->
+      <script src="/js/bootstrap.min.js"></script>
+      <!-- AdminLTE App -->
+      <script src="/js/app.min.js"></script>
+      <script src="/js/bootstrap-select.min.js"></script>
+      <script src="/js/bootstrap-datepicker.js"></script>
+      <script>
+      $('.selectpicker').selectpicker({ });
+
+      $('.datepicker').datepicker({
+        format: 'dd/mm/yyyy',
+        startDate: '-3d'
+      });
+
+    </script>
+  </body>
+  </html>

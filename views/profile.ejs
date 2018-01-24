@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>New Farmer Enrollment</title>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <!-- Bootstrap 3.3.6 -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/admin.css">
+  <link rel="stylesheet" href="/css/skin-blue.css">
+  <link rel="stylesheet" href="/css/style.css">
+
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+  <div class="wrapper">
+    <% include ./header %>
+    <!-- Main Header -->
+    <div class="content-wrapper">
+
+      <!-- Main content -->
+      <div class="new_form_enrollment">
+        <section class="content">
+
+          <!-- Content Wrapper. Contains page content -->
+
+          <form method="post" name="enrollment" enctype='multipart/form-data' action="">
+
+            <div class="greenbox">
+              <div class="title"><h3></h3></div>
+              <div class="content">
+
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col-xs-12">
+                      <div class="col-sm-4 ">
+                        <div class="well">
+                          <h3><span class="fa fa-user"></span> Details</h3>
+
+                          <% if (user.email) { %>
+                            <p>
+                              <br>  <strong>Email</strong>: <%= user.email %><br>
+                              <strong>Role</strong>: <%= user.role_name %><br>
+                              <strong>First Name</strong>: <%= user.first_name %><br>
+                              <strong>Middle Name</strong>: <%= user.middle_name %><br>
+                              <strong>Last Name</strong>: <%= user.last_name %><br>
+                            </p>
+
+                            <% }  %>
+
+                          </div>
+                        </div>
+                        <div class="col-sm-offset-4 col-sm-4 ">
+                          <img src="<%= user.file_path %>" alt="profile pic" style="width:250px;height:200px;">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+
+              </div>
+            </form>
+            <!-- Your Page Content Here -->
+          </section>
+        </div>
+        <!-- /.content -->
+      </div>
+      <!-- /.content-wrapper -->
+
+    </div>
+    <!-- ./wrapper -->
+    <!-- REQUIRED JS SCRIPTS -->
+    <!-- jQuery 2.2.3 -->
+    <script type= "text/javascript" src = "/js/city_state.js"></script>
+
+    <!-- Bootstrap 3.3.6 -->
+    <script src="/js/jquery-2.2.3.min.js"></script>
+    <!-- Bootstrap 3.3.6 -->
+    <script src="/js/bootstrap.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="/js/app.min.js"></script>
+    <script src="/js/bootstrap-select.min.js"></script>
+    <script src="/js/bootstrap-datepicker.js"></script>
+
+    <!--script src="http://seowebsitedesigning.com/code/create-country-state-and-city-dropdown-using-jquery/location.js"></script-->
+    <script>
+    $('.selectpicker').selectpicker({ });
+
+    $('.datepicker').datepicker({
+      format: 'yyyy-mm-dd',
+      startDate: '-3d'
+    });
+  </script>
+</body>
+</html>

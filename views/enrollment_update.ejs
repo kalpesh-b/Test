@@ -1,0 +1,91 @@
+<!-- views/signup.ejs -->
+<!doctype html>
+<html>
+<head>
+	<title>TT add user</title>
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css"> <!-- load bootstrap css -->
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"> <!-- load fontawesome -->
+	<style>
+	body 		{ padding-top:80px; }
+	</style>
+</head>
+<body>
+	<div class="container">
+
+		<div class="col-sm-6 col-sm-offset-3">
+
+			<h1><span class="fa fa-sign-in"></span> add new user</h1>
+			<!-- LOGIN FORM -->
+			<form  action="/enroll/update" enctype='multipart/form-data' method="post">
+				<div class="form-group">
+					<label>Name</label>
+					<input type="text" class="form-control" name="frm_name" value="<%= ttdata.frm_name %>">
+				</div>
+				<div class="form-group">
+					<label>Middle Name</label>
+					<input type="text" class="form-control" name="frm_husbnd_name" value="<%= ttdata.frm_husbnd_name %>">
+				</div>
+				<div class="form-group">
+					<label>Last name</label>
+					<input type="text" class="form-control" name="last_name" value="<%= ttdata.last_name %>">
+				</div>
+				<div class="form-group" >
+					<label>profile picture </label>
+					<!-- webkitdirectory -->
+					<input type="file"   multiple name="picture" value="<%= ttdata.picture %>">
+				</div>
+				<div class="form-group">
+					<label>address</label>
+					<input type="text" class="form-control" name="addr1" value="<%= ttdata.addr1 %>">
+				</div>
+				<div class="form-group">
+					<label>city</label>
+					<input type="text" class="form-control" name="city_twn_village" value="<%= ttdata.city_twn_village %>">
+				</div>
+				<div class="form-group">
+					<label>state</label>
+					<input type="text" class="form-control" name="state" value="<%= ttdata.state %>">
+				</div>
+				<div class="form-group">
+					<label>pincode</label>
+					<input type="number" class="form-control" name="pincode" value="<%= ttdata.pincode %>">
+				</div>
+
+				<div class="form-group">
+					<label>country</label>
+					<input type="text" class="form-control" name="country" value="<%= ttdata.country %>">
+				</div>
+
+				<div class="form-group">
+					<label>mobile</label>
+					<input type="number" class="form-control" name="mobile" value="<%= ttdata.mobile %>">
+				</div>
+				<div class="form-group">
+					<label>email</label>
+					<input type="text" class="form-control" name="email" value="<%= ttdata.email %>">
+				</div>
+
+				<div class="form-group">
+					<label>district</label>
+					<input type="text" class="form-control" name="district" value="<%= ttdata.district %>">
+				</div>
+				<div class="form-group">
+					<label>landline</label>
+					<input type="number" class="form-control" name="landline" value="<%= ttdata.landline %>">
+				</div>
+
+
+				<button type="submit" class="btn btn-primary btn-lg">Update</button>
+			</form>
+
+			<hr>
+
+			<!-- <p>Already have an account? <a href="/login">Login</a></p> -->
+			<!-- <p>Or go <a href="/">home</a>.</p> -->
+
+		</div>
+
+	</div>
+
+</body>
+</html>

@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Enrolled Farmers</title>
+	<!-- Tell the browser to be responsive to screen width -->
+	<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+	<!-- Bootstrap 3.3.6 -->
+	<link rel="stylesheet" href="../css/bootstrap.min.css">
+	<link rel="stylesheet" href="../css/admin.css">
+	<link rel="stylesheet" href="../css/skin-blue.css">
+	<link rel="stylesheet" href="../css/datepicker.css">
+	<link rel="stylesheet" href="../css/bootstrap-select.min.css">
+	<link rel="stylesheet" href="../css/style.css">
+	<script>
+
+	function validateEmail(sEmail) {
+		var reEmail = /^(?:[\w\!\#\$\%\&\'\*\+\-\/\=\?\^\`\{\|\}\~]+\.)*[\w\!\#\$\%\&\'\*\+\-\/\=\?\^\`\{\|\}\~]+@(?:(?:(?:[a-zA-Z0-9](?:[a-zA-Z0-9\-](?!\.)){0,61}[a-zA-Z0-9]?\.)+[a-zA-Z0-9](?:[a-zA-Z0-9\-](?!$)){0,61}[a-zA-Z0-9]?)|(?:\[(?:(?:[01]?\d{1,2}|2[0-4]\d|25[0-5])\.){3}(?:[01]?\d{1,2}|2[0-4]\d|25[0-5])\]))$/;
+
+		if(!sEmail.match(reEmail) && sEmail=="") {
+			alert("Invalid email address");
+			return false;
+		}
+
+		return true;
+	}
+
+	function FormValidation(){
+		var picture= document.forms["enrollment"]["picture"].value;
+		if (picture == "") {
+			alert("Choose profile Image");
+			return false;
+		}
+
+		var role = document.forms["user"]["role_id"].value;
+		if (role == "") {
+			alert("Role name must be selected");
+			return false;
+		}
+		var Name = document.forms["user"]["first_name"].value;
+		if (Name == "") {
+			alert("Name must be filled out");
+			return false;
+		}
+		var frm_husbnd_name = document.forms["user"]["middle_name"].value;
+		if (frm_husbnd_name == "") {
+			alert("Middle Name must be filled out");
+			return false;
+		}
+		var last_name = document.forms["user"]["last_name"].value;
+		if (last_name == "") {
+			alert("Last name must be filled out");
+			return false;
+		}
+		var addr1 = document.forms["user"]["addr1"].value;
+		if (addr1 == "") {
+			alert("address must be filled out");
+			return false;
+		}
+		var city_twn_village = document.forms["user"]["city_twn_village"].value;
+		if (city_twn_village == "") {
+			alert("City name must be filled out");
+			return false;
+		}
+		var pincode = document.forms["user"]["pincode"].value;
+		if (pincode == "") {
+			alert("pincode must be filled out");
+			return false;
+		}
+		var country = document.forms["user"]["country"].value;
+		var state = document.forms["user"]["state"].value;
+		var city = document.forms["user"]["city"].value;
+		if (country == "" && state=="" && city=="") {
+			alert("country, state and city feilds must be filled out");
+			return false;
+		}
+		var email = document.forms["user"]["email"].value;
+		if (email == "") {
+			alert("Email must be filled out");
+			return false;
+		}
+		var mobile = document.forms["user"]["mobile"].value;
+		var pattern = /^[\s()+-]*([0-9][\s()+-]*){6,20}$/;
+		if (!pattern.test(mobile) || mobile=="") {
+			alert("Mobile number must filled out; Invalid number; must be ten digits")
+			mobile.focus()
+			return false
+		}
+		var landline = document.forms["user"]["landline"].value;
+		var pattern = /^[\s()+-]*([0-9][\s()+-]*){6,20}$/;//^\(0\d{1,2}\)\d{3}-\d{4}$/;
+		if (!pattern.test(landline) || landline=="") {
+			alert("landline not valid");
+			return false;
+		}
+	}
+</script>
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+	<div class="wrapper">
+		<% include ./header %>
+		<!-- Content Wrapper. Contains page content -->
+		<div class="content-wrapper">
+			<!-- Main content -->
+			<div class="new_form_enrollment">
+				<section class="content">
+
+					<!-- <% console.log('roles list ttdada', JSON.stringify(ttdata)) %> -->
+					<!-- <% console.log('roles list ttdata') %> -->
+
+					<!-- show any messages that come back with authentication -->
+					<% if (message.length > 0) { %>
+						<div class="alert alert-success"><%= message %></div>
+						<% } %>
+						<form method="post" onsubmit="return FormValidation()" name="user">
+							<div class="row">
+								<div class="col-md-12">
+									<div class="whitebox">
+										<div class="content">
+											<div class="row">
+												<div class="col-md-3">
+													<div class="form-group">
+														<select class="form-control selectpicker select_2 " name="role_id" placeholder="Role" style="width:50%">
+															<option>Select Role For User</option>
+															<% for (var i = 0; i < ttdata.roles.length; i++) { %>
+																<option value="<%= ttdata.roles[i].role_id %>"><%= ttdata.roles[i].role_name %></option>
+																<% }%>
+															</select>
+														</div>
+													</div>
+													<div class="col-md-3">
+														<div class="form-group">
+															<select class="form-control selectpicker select_2">
+																<option>All GCPs</option>
+																<% for (var i = 0; i < ttdata.gcps.length; i++) { %>
+																	<option value=<%= ttdata.gcps[i].gcp_id %>> <%= ttdata.gcps[i].gcp_name %></option>
+																	<% } %>
+																</select>
+															</div>
+														</div>
+													</div>
+													<script>
+													function readURL(input) {
+														if (input.files && input.files[0]) {
+															var reader = new FileReader();
+
+															reader.onload = function (e) {
+																$('#picture')
+																.attr('src', e.target.result)
+																.width(200)
+																.height(200);
+															};
+
+															reader.readAsDataURL(input.files[0]);
+														}
+													}
+													</script>
+													<div class="row">
+														<div class="col-md-3 farmer-profile-pic"><!-- col-md-3 -->
+															<div class="farmer-profile-pic-block">
+																<input type="file" name="picture" onchange="readURL(this);"/>
+																<img id="picture" src="#">
+															</div>
+														</div>
+														<div class="col-md-9">
+															<div class="linegrey2"></div>
+															<div class="row">
+																<div class="col-md-4">
+																	<div class="form-group">
+																		<input type="text" class="form-control" placeholder="First Name" name="first_name">
+																	</div>
+																</div>
+
+																<div class="col-md-4">
+																	<div class="form-group">
+																		<input type="text" class="form-control" placeholder="Middle Name" name="middle_name">
+																	</div>
+																</div>
+
+																<div class="col-md-4">
+																	<div class="form-group">
+																		<input type="text" class="form-control" placeholder="Last Name" name="last_name">
+																	</div>
+																</div>
+															</div>
+
+															<div class="row">
+																<div class="col-md-4">
+																	<div class="form-group">
+																		<input type="text" class="form-control" placeholder="Mobile Number" name="mobile">
+																	</div>
+																</div>
+
+																<div class="col-md-4">
+																	<div class="form-group">
+																		<input type="text" class="form-control" placeholder="Email Address" name="email">
+																	</div>
+																</div>
+
+																<div class="col-md-4">
+																	<div class="form-group">
+																		<input type="text" class="form-control" placeholder="Landline Number" name="landline">
+																	</div>
+																</div>
+															</div>
+															<div class="row">
+																<div class="col-md-8">
+																	<div class="form-group">
+																		<textarea class="form-control" rows="4" placeholder="Address" name="addr1"></textarea>
+																	</div>
+																</div>
+																<div class="col-md-4">
+																	<div class="form-group">
+																		<input type="text" class="form-control" placeholder="Village / Town / City" name="city_twn_village">
+																	</div>
+																</div>
+															</div>
+														</div>
+
+													</div>
+
+
+													<!--div class="fullbelt">Farm Details</div-->
+
+													<div class="row">
+														<div class="col-md-9">
+															<div class="row">
+																<div class="col-md-4">
+																	<div class="form-group">
+																		<input type="text" class="form-control" name="state" placeholder="State">
+
+																	</div>
+																	<div class="form-group">
+																		<input type="text" class="form-control" name="country" placeholder="Country">
+																	</div>
+																</div>
+																<div class="col-md-4">
+																	<div class="form-group">
+																		<input type="text" class="form-control" placeholder="Pin Code" name="pincode"pattern="[1-9][0-9]{5}" onkeyup="this.value=this.value.replace(/[^\d]/,'')">
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+
+													<div class="form-group form_btns">
+														<div class="row">
+															<div class="col-xs-12">
+																<button type="submit" class="btn green">Add User</button>
+																<button type="reset" class="btn light">Reset</button>
+															</div>
+														</div>
+													</div>
+
+												</div>
+											</div>
+										</div>
+									</div>
+								</form>
+
+								<!-- Your Page Content Here -->
+							</section>
+						</div>
+						<!-- /.content -->
+					</div>
+					<!-- /.content-wrapper -->
+
+
+				</div>
+				<!-- ./wrapper -->
+				<!-- REQUIRED JS SCRIPTS -->
+				<!-- jQuery 2.2.3 -->
+				<script src="../js/jquery-2.2.3.min.js"></script>
+				<!-- Bootstrap 3.3.6 -->
+				<script src="../js/bootstrap.min.js"></script>
+				<!-- AdminLTE App -->
+				<script src="../js/app.min.js"></script>
+				<script src="../js/bootstrap-select.min.js"></script>
+				<script src="../js/bootstrap-datepicker.js"></script>
+				<script>
+				$('.selectpicker').selectpicker({ });
+
+				$('.datepicker').datepicker({
+					format: 'dd/mm/yyyy',
+					startDate: '-3d'
+				});
+
+			</script>
+		</body>
+		</html>
